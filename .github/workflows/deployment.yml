@@ -1,0 +1,35 @@
+name: deploy Project
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Install node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+      - name: Install Yarn
+        run: npm install --global yarn
+      - name: Install dependencies
+        run: yarn
+      - name: Run tests
+        run: npm test
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Install node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+      - name: Install Yarn
+        run: npm install --global yarn
+      - name: Install dependencies
+        run: yarn
+      - name: Build project
+        run: yarn build
+      - name: Deploy to server
+        run: echo "Deploying to server..."
